@@ -37,7 +37,8 @@ where
     Mutation: ObjectType + 'static,
     Subscription: SubscriptionType + 'static,
 {
-    warp::any()
+    // warp::any()
+    warp::post().and(warp::path("graphql"))
         .and(warp::get().and(warp::query()).map(BatchRequest::Single))
         .or(warp::post()
             .and(warp::header::optional::<String>("content-type"))
